@@ -109,7 +109,7 @@ def devpiserver_on_upload(stage, project, version, link):
 
     if pickle_file.exists():
         debug("loading pickle file: %s" % pickle_file.strpath)
-        with open(pickle_file.strpath, "r") as f:
+        with open(pickle_file.strpath, "rb") as f:
             rss = pickle.load(f)
     else:
         debug("pickle file doesn't exist yet")
@@ -146,7 +146,7 @@ def devpiserver_on_upload(stage, project, version, link):
     debug("writing xml file: %s" % xml_file.strpath)
     rss.write_xml(open(xml_file.strpath, "w"), encoding="utf-8")
 
-    with open(pickle_file.strpath, "w") as f:
+    with open(pickle_file.strpath, "wb") as f:
         debug("writing pickle file: %s" % pickle_file.strpath)
         s = StringIO()
         pickle.dump(rss, s)
